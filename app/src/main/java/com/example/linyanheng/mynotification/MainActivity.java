@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String CHANNEL_ID = "yh";
     private NotificationManager mgr;
     private NotificationCompat.Builder builder;
     @Override
@@ -26,17 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
         {
-            NotificationChannel notificationChannel = new NotificationChannel("YH","custom",NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,"custom",NotificationManager.IMPORTANCE_HIGH);
             mgr.createNotificationChannel(notificationChannel);
         }
 
     }
 
     public void Test1(View view) {
-        builder = new NotificationCompat.Builder(this);
+        builder = new NotificationCompat.Builder(this,CHANNEL_ID);
         builder.setContentTitle("重要通知").setContentText("通知內容")
                 .setSmallIcon(R.drawable.ic_stat_name)
-                .setChannelId("YH");
+                ;
 
         mgr.notify(1,builder.build());
     }
